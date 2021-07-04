@@ -161,9 +161,9 @@
             <body>
                 <div class="topnav">
                     <a href="../home.php">Administration</a>
-                    <a href="../student">Gerer les Etudiants</a>
-                    <a class="active" href="index.php">Gerer les Modules</a>
-                    <a href="../Result">Gerer les Resultats</a>
+                    <a href="../Student">Gerer les Etudiants</a>
+                    <a href="../Module">Gerer les Modules</a>
+                    <a class="active" href="index.php">Gerer les Resultats</a>
                 </div>
         EOT;
     }

@@ -120,9 +120,9 @@
 <body>
 <div class="topnav">
     <a class = "active" href="home.php">Administration</a>
-    <a href="./student/">Gerer les Etudiants</a>
+    <a href="./Student/">Gerer les Etudiants</a>
     <a href="./Module/">Gerer les Modules</a>
-    <a href="result.php">Gerer les Resultats</a>
+    <a href="./Result/">Gerer les Resultats</a>
 </div>
     <main>
         

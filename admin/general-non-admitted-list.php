@@ -144,11 +144,10 @@ session_start();
 </head>
 <body>
 <div class="topnav">
-<a href="home.php">Administration</a>
-    <a href="add-student.php">Ajouter un Etudiant</a>
-    <a href="add-spc.php">Ajouter une Specialité</a>
-    <a href="add-module.php">Ajouter un Module</a>
-    <a href="add-result.php">Ajouter une Resultat</a>
+    <a class = "active" href="home.php">Administration</a>
+    <a href="./Student/">Gerer les Etudiants</a>
+    <a href="./Module/">Gerer les Modules</a>
+    <a href="./Result/">Gerer les Resultats</a>
 </div>
     <center><h3>Les Etudiants Ajournee <?php
         include ('../connect.php');

@@ -8,12 +8,6 @@
     $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.student') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
-<div class="topnav">
-    <a href="../home.php">Administration</a>
-    <a class="active" href="index.php">Gerer les Etudiants</a>
-    <a href="../module">Gerer les Modules</a>
-    <a href="../results">Gerer les Resultats</a>
-</div>
 <div class="content read">
 	<h2>Liste des Etudiant</h2>
 	<a href="create.php" class="create-contact">Ajouter un Etudiant</a>
