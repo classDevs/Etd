@@ -3,7 +3,7 @@
     $pdo = pdo_connect_mysql();
 
     $stmt = $pdo->prepare('SELECT srms.results.id as id,id_std,id_mod,tp,td,cc,exam,result,fname,lname,titre,grp 
-    FROM srms.results INNER JOIN srms.student ON srms.results.id_std = srms.student.id INNER JOIN srms.module ON srms.results.id_mod = srms.module.id  ORDER BY id_std');
+    FROM srms.results INNER JOIN srms.student ON srms.results.id_std = srms.student.id INNER JOIN srms.module ON srms.results.id_mod = srms.module.id');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
     $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.results') ->fetchColumn();

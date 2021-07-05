@@ -19,8 +19,8 @@ $pdo = pdo_connect_mysql();
 $msg ='';
 if(!empty($_POST)){
     $id = isset($_POST['id']) ? $_POST['id'] : 0;
-    $std = isset($_POST['std']);
-    $mod = isset($_POST['mod']);
+    $std = isset($_POST['std']) ? $_POST['std'] : 0;
+    $mod = isset($_POST['mod']) ? $_POST['mod'] : 0;
     $name = isset($_POST['name']) ? $_POST['name'] : 0;
     $email = isset($_POST['email']) ? $_POST['email'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : 0;
