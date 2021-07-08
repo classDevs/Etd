@@ -3,7 +3,7 @@ include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
 if (isset($_GET['id'])) {
-    $stmt = $pdo->prepare('SELECT * FROM student.results WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM srms.results WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {

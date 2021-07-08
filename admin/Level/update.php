@@ -5,11 +5,11 @@ $msg = '';
 if (isset($_GET['id'])) {
     if (!empty($_POST)) {
         $name = isset($_POST['name']) ? $_POST['name'] : 0;
-        $stmt = $pdo->prepare('UPDATE student.level SET name = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE srms.level SET name = ? WHERE id = ?');
         $stmt->execute([$name, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM student.level WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM srms.level WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {

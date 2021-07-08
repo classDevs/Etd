@@ -8,11 +8,11 @@ if (isset($_GET['id'])) {
         $name = isset($_POST['name']) ? $_POST['name'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $title = isset($_POST['adr']) ? $_POST['adr'] : '';
-        $stmt = $pdo->prepare('UPDATE student.module SET id = ?, titre = ?, coeficient = ?, unit = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE srms.module SET id = ?, titre = ?, coeficient = ?, unit = ? WHERE id = ?');
         $stmt->execute([$id, $name, $email,$title, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM student.module WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM srms.module WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {

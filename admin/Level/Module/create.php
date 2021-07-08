@@ -2,7 +2,7 @@
 function connect()
 {
     $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'student';
+    $databaseName = 'srms';
     $databaseUsername = 'root';
     $databasePassword = '';
     
@@ -24,7 +24,7 @@ if(!empty($_POST)){
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $phone = isset($_POST['crd']) ? $_POST['crd'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : '';
-    $stmt = $pdo->prepare('INSERT INTO student.module (id,titre,coeficient,credit,unit) VALUES (?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO srms.module (id,titre,coeficient,credit,unit) VALUES (?, ?, ?, ?, ?)');
     $stmt->execute([$id, $name, $email,$phone,$title]);
 
     $msg ='Created Successfully!!!';
