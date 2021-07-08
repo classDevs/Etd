@@ -179,8 +179,8 @@
 
             $res = $connection -> query($req);
             while($row=$res-> fetch_assoc()){
-                $name =$row['fname'] ;
-                echo $row['fname'];
+                $name =$row['lname'] ;
+                echo $row['lname'];
             }
         ?>
         </td></tr>
@@ -191,8 +191,8 @@
 
             $res = $connection -> query($req);
             while($row=$res-> fetch_assoc()){
-                $name =$row['lname'] ;
-                echo $row['lname'];
+                $name =$row['fname'] ;
+                echo $row['fname'];
             }
         ?>
         </td></tr>
@@ -211,28 +211,40 @@
     <br><br><br>
     <table align="center" id="note">
             <tr>
+                <th>Unites</th>
                 <th>Matiere</th>
                 <th>Coeficients</th>
                 <th>Moyens Modules</th>
+                <th>Credit</th>
                 <th>Totale</th>
             </tr>
             <?php
                  include('connect.php');
-                 $req = "SELECT m.titre as module,m.coeficient as coef,r.result as res
-                 FROM module m, results r WHERE r.id_std = '".$id."' and m.id = r.id_mod";
+                 $req = "SELECT m.unit as unit m.titre as module,m.coeficient as coef,r.result as res m.credit as credit
+                 FROM module m, results r WHERE r.id_std = '".$id."' and m.id = r.id_mod ORDER BY semsetre";
      
                  $res = $connection -> query($req);
                  $total = 0;
                  $scoef = 0;
+                 $credit = 0;
                  while($row=$res-> fetch_assoc()){
                      $tot = $row['coef']*$row['res'];
+                     if($row['res']>=10){
+                        $credit += $row['credit'];
+                        $creditmod = $row['credit'];
+                    }else{
+                        $creditmod = 0;
+                    }
                      echo "<tr>
+                     <td>".$row['unit']."</td>
                      <td>".$row['module']."</td>
                      <td>".$row['coef']."</td>
                      <td>".$row['res']."</td>
+                     <td>".$creditmod."</td>
                      <td>".$tot."</td>
                      </tr>";
                      $total+=$tot;
+                     
                      $scoef+=$row['coef'];
                  }
                  $fres = $total/$scoef;
@@ -240,6 +252,7 @@
                  <td>Totale et Moyenne</td>
                  <td>".$scoef."</td>
                  <td>".$total."</td>
+                 <td>".$credit."</td>
                  <td>".$fres."</td>
                  </tr>";
             ?>

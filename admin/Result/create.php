@@ -2,7 +2,7 @@
 function connect()
 {
     $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'srms';
+    $databaseName = 'student';
     $databaseUsername = 'root';
     $databasePassword = '';
     
@@ -25,7 +25,7 @@ if(!empty($_POST)){
     $email = isset($_POST['email']) ? $_POST['email'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : 0;
     $moy = (($id+$name+$email)/3)*0.4 + $title*0.6;
-    $stmt = $pdo->prepare('INSERT INTO srms.results (id_std,id_mod,tp,td,cc,exam,result) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO student.results (id_std,id_mod,tp,td,cc,exam,result) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$std,$mod,$id, $name, $email,$title,$moy]);
 
     $msg ='Created Successfully!!!';
@@ -40,16 +40,16 @@ if(!empty($_POST)){
         
         <select name="std"><?php 
                 $connection = connect();
-                $req = "SELECT id,fname,lname,grp FROM student ORDER BY grp";
+                $req = "SELECT id,fname,lname,grp,id_lev FROM student ORDER BY grp";
                 $res = $connection-> query($req);
                 while($row = $res -> fetch_assoc()){
-                    echo "<option value = ".$row['id'].">".$row['id']."-".$row['grp']." : ".$row['fname'] ."  ".$row['lname'] ."</option>";
+                    echo "<option value = ".$row['id'].">".$row['id']."-".$row['grp']."-".$row['id_lev'].
+                            " : ".$row['fname'] ."  ".$row['lname'] ."</option>";
                 }
             ?></select>
         
         <label for="mod">Module</label>
         <select name="mod"><?php 
-                include'../connect.php';
                 $req = "SELECT id,titre,semseter FROM module ORDER BY id";
                 $res = $connection-> query($req);
                 

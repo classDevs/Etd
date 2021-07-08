@@ -3,7 +3,7 @@
         $DATABASE_HOST = 'localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
-        $DATABASE_NAME = 'srms';
+        $DATABASE_NAME = 'student';
         
         try{
             return new PDO('mysql:host='. $DATABASE_HOST .';dbname ='. $DATABASE_NAME .'; charset=utf8',$DATABASE_USER,$DATABASE_PASS);
@@ -159,12 +159,12 @@
 
             </head>
             <body>
-                <div class="topnav">
-                    <a href="../home.php">Administration</a>
-                    <a href="../student">Gerer les Etudiants</a>
-                    <a class="active" href="index.php">Gerer les Modules</a>
-                    <a href="../Result">Gerer les Resultats</a>
-                </div>
+            <div class="topnav">
+                <a href="../home.php">Administration</a>
+                <a href="../student">Gerer les Etudiants</a>
+                <a class="active" href="index.php">Gerer les Niveaux</a>
+                <a href="Module/">Gerer Les Unites</a>
+            </div>
         EOT;
     }
     function template_footer(){

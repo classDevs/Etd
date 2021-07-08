@@ -121,7 +121,7 @@
 <div class="topnav">
     <a class = "active" href="home.php">Administration</a>
     <a href="./Student/">Gerer les Etudiants</a>
-    <a href="./Module/">Gerer les Modules</a>
+    <a href="./Level/">Gerer les Niveaux</a>
     <a href="./Result/">Gerer les Resultats</a>
 </div>
     <main>

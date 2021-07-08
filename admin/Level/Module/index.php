@@ -1,0 +1,53 @@
+<?php
+    include 'functions.php';
+    $pdo = pdo_connect_mysql();
+
+    $stmt = $pdo->prepare('SELECT * FROM student.module ORDER BY id');
+    $stmt->execute();
+    $contacts = $stmt->fetchAll();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.module') ->fetchColumn();
+?>
+<?=template_header('Etudiant')?>
+<div class="content read">
+	<h2>Liste des Modules</h2>
+	<a href="create.php" class="create-contact">Ajouter un Module</a>
+	<table id="mod">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Uniter</td>
+                <td>Libelle</td>
+                <td>Crédit</td>
+                <td>Coefecient</td>
+                <td>Niveau</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($contacts as $contact): ?>
+            <tr>
+                <td><?=$contact['id']?></td>
+                <td><?=$contact['unit']?></td>
+                <td><?=$contact['titre']?></td>
+                <td><?=$contact['credit']?></td>
+                <td><?=$contact['coeficient']?></td>
+                <td><?php
+                    $stmt2 = $pdo->prepare('SELECT * FROM student.level WHERE id = '.$contact['id_lev']);
+                    $stmt2->execute();
+                    $lev = $stmt2->fetchAll();?>
+                    <?=$lev?></td>
+                <td class="actions">
+                    <a href="update.php?id=<?=$contact['id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                    <a href="delete.php?id=<?=$contact['id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<script>
+    $(document).ready( function () {
+        $('#mod').DataTable();
+    } );
+</script>
+
+<?=template_footer()?>

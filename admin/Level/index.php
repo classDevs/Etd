@@ -2,22 +2,20 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM srms.module ORDER BY id');
+    $stmt = $pdo->prepare('SELECT * FROM student.level');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.module') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.results') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">
-	<h2>Liste des Modules</h2>
-	<a href="create.php" class="create-contact">Ajouter un Module</a>
+	<h2>Liste des Resultats</h2>
+	<a href="create.php" class="create-contact">Ajouter une Resultat</a>
 	<table id="mod">
         <thead>
             <tr>
                 <td>#</td>
-                <td>Libelle</td>
-                <td>Coefecient</td>
-                <td>Semestre</td>
+                <td>Niveau</td>
                 <td></td>
             </tr>
         </thead>
@@ -25,9 +23,7 @@
             <?php foreach ($contacts as $contact): ?>
             <tr>
                 <td><?=$contact['id']?></td>
-                <td><?=$contact['titre']?></td>
-                <td><?=$contact['coeficient']?></td>
-                <td><?=$contact['semseter']?></td>
+                <td><?=$contact['name']?></td>
                 <td class="actions">
                     <a href="update.php?id=<?=$contact['id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
                     <a href="delete.php?id=<?=$contact['id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>

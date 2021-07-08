@@ -159,12 +159,10 @@
 
             </head>
             <body>
-            <div class="topnav">
-                <a href="../home.php">Administration</a>
-                <a class="active" href="index.php">Gerer les Etudiants</a>
-                <a href="../Level">Gerer les Niveaux</a>
-                <a href="../Result">Gerer les Resultats</a>
-            </div>
+                <div class="topnav">
+                    <a href="../index.php">Gerer les Niveaux</a>
+                    <a class="active" href="index.php">Gerer les Unites</a>
+                </div>
         EOT;
     }
     function template_footer(){

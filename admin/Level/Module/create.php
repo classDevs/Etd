@@ -19,15 +19,13 @@ $pdo = pdo_connect_mysql();
 $msg ='';
 if(!empty($_POST)){
     $id = isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != 'auto' ? $_POST['id'] : NULL;
-    $lev = isset($_POST['level']) ? $_POST['level'] : 0;
+
     $name = isset($_POST['name']) ? $_POST['name'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+    $phone = isset($_POST['crd']) ? $_POST['crd'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : '';
-    $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
-
-    $stmt = $pdo->prepare('INSERT INTO student.student (id,lname,fname,grp,adress,password,id_lev) VALUES (?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$id, $name, $email, $phone,$title,$pwd,$lev]);
+    $stmt = $pdo->prepare('INSERT INTO student.module (id,titre,coeficient,credit,unit) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$id, $name, $email,$phone,$title]);
 
     $msg ='Created Successfully!!!';
 }
@@ -35,10 +33,18 @@ if(!empty($_POST)){
 <?=template_header('Create')?>
 
 <div class="content update">
-	<h2>Ajouter Un Etudiant</h2>
+	<h2>Ajouter Un Module</h2>
     <form action="create.php" method="post">
-        <label for="level">Niveau</label>
-        <select name="level" id="level"><?php
+        <label for="id">ID</label>
+        <label for="name">Libelle</label>
+        <input type="text" name="id" value="auto" id="id">
+        <input type="text" name="name" id="name">
+        <label for="email">Coeficient</label>
+        <label for="crd">Crédit:</label>
+        <input type="number" name="email" id="email" min="1">
+        <input type="number" name="crd" id="crd" step="1">
+        <label for="lev">Niveau :</label>
+        <select name="lev" id="lev"><?php 
                 $connection = connect();
                 $req = "SELECT id,name FROM level";
                 $res = $connection-> query($req);
@@ -47,18 +53,12 @@ if(!empty($_POST)){
                 }
             ?>
         </select>
-        <label for="id">ID</label>
-        <label for="name">Nom</label>
-        <input type="text" name="id" value="auto" id="id">
-        <input type="text" name="name" id="name">
-        <label for="email">Prenom</label>
-        <label for="adr">Adresse</label>
-        <input type="text" name="email" id="email">
-        <input type="text" name="adr" id="adr">
-        <label for="pwd">Mot De Passe </label>
-        <label for="phone">Group</label>
-        <input type="password" name="pwd" id="title">
-        <input type="text" name="phone" id="phone">
+        <label for="adr">Unite :</label>
+        <select name="adr" id="adr">
+            <option value="fondamentale">Fondamentale</option>
+            <option value="methodologie ">Méthodologie </option>
+            <option value="transversale ">Transversale </option>
+        </select>
         <input type="submit" value="Create">
     </form>
     <?php if ($msg): ?>

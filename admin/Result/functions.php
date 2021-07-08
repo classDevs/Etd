@@ -3,7 +3,7 @@
         $DATABASE_HOST = 'localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
-        $DATABASE_NAME = 'srms';
+        $DATABASE_NAME = 'student';
         
         try{
             return new PDO('mysql:host='. $DATABASE_HOST .';dbname ='. $DATABASE_NAME .'; charset=utf8',$DATABASE_USER,$DATABASE_PASS);
@@ -162,7 +162,7 @@
                 <div class="topnav">
                     <a href="../home.php">Administration</a>
                     <a href="../Student">Gerer les Etudiants</a>
-                    <a href="../Module">Gerer les Modules</a>
+                    <a href="../Level">Gerer les Niveaux</a>
                     <a class="active" href="index.php">Gerer les Resultats</a>
                 </div>
         EOT;
