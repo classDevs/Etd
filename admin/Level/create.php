@@ -5,7 +5,7 @@ $msg ='';
 if(!empty($_POST)){
     $id = isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != 'auto' ? $_POST['id'] : NULL;
     $name = isset($_POST['name']) ? $_POST['name'] : 0;
-    $stmt = $pdo->prepare('INSERT INTO srms.level (id,name) VALUES (?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO student.level (id,name) VALUES (?, ?)');
     $stmt->execute([$id,$name]);
 
     $msg ='Created Successfully!!!';

@@ -1,9 +1,24 @@
 <?php
+function connect()
+{
+    $databaseHost = '127.0.0.1';//or localhost
+    $databaseName = 'student';
+    $databaseUsername = 'root';
+    $databasePassword = '';
+    
+    if($connection = new mysqli($databaseHost, $databaseUsername, $databasePassword, $databaseName)){
+        return $connection;
+    }else{
+        echo "La Connexion au base de donnes est impossible";
+    }   
+}
+?>
+<?php
     function pdo_connect_mysql(){
         $DATABASE_HOST = 'localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
-        $DATABASE_NAME = 'srms';
+        $DATABASE_NAME = 'student';
         
         try{
             return new PDO('mysql:host='. $DATABASE_HOST .';dbname ='. $DATABASE_NAME .'; charset=utf8',$DATABASE_USER,$DATABASE_PASS);

@@ -10,11 +10,11 @@ if (isset($_GET['id'])) {
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
         $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
-        $stmt = $pdo->prepare('UPDATE srms.student SET id = ?, lname = ?, fname = ?, grp = ? , password = ?, id_lev = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE student.student SET id = ?, lname = ?, fname = ?, grp = ? , password = ?, id_lev = ? WHERE id = ?');
         $stmt->execute([$id, $name, $email, $phone,$pwd,$lev, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM srms.student WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM student.student WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
         </select>
         <label for="id">ID</label>
         <label for="name">Nom</label>
-        <input type="text" name="id" value="<?=$contact['id']?>" id="id">
+        <input type="text" name="id" value="<?=$contact['id']?>" id="id" readonly>
         <input type="text" name="name" id="name" value="<?=$contact['lname']?>">
         <label for="email">Prenom</label>
         <label for="adr">Adresse</label>

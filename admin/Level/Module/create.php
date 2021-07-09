@@ -2,7 +2,7 @@
 function connect()
 {
     $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'srms';
+    $databaseName = 'student';
     $databaseUsername = 'root';
     $databasePassword = '';
     
@@ -24,8 +24,10 @@ if(!empty($_POST)){
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $phone = isset($_POST['crd']) ? $_POST['crd'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : '';
-    $stmt = $pdo->prepare('INSERT INTO srms.module (id,titre,coeficient,credit,unit) VALUES (?, ?, ?, ?, ?)');
-    $stmt->execute([$id, $name, $email,$phone,$title]);
+    $level = isset($_POST['lev']) ? $_POST['lev'] : 0;
+    $sem = isset($_POST['sem']) ? $_POST['sem'] : 0;
+    $stmt = $pdo->prepare('INSERT INTO student.module (id,titre,coeficient,credit,unit,id_lev,semseter) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$id, $name, $email,$phone,$title,$level,$sem]);
 
     $msg ='Created Successfully!!!';
 }
@@ -58,6 +60,11 @@ if(!empty($_POST)){
             <option value="fondamentale">Fondamentale</option>
             <option value="methodologie ">Méthodologie </option>
             <option value="transversale ">Transversale </option>
+        </select>
+        <label for="sem">Semestre :</label>
+        <select name="sem" id="sem">
+            <option value="1">Semestre 1</option>
+            <option value="2 ">Semestre 2</option>
         </select>
         <input type="submit" value="Create">
     </form>

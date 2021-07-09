@@ -2,10 +2,10 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM srms.student ORDER BY id');
+    $stmt = $pdo->prepare('SELECT * FROM student.student ORDER BY id');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.student') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.student') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">
@@ -19,6 +19,7 @@
                 <td>Prenom</td>
                 <td>Groupe</td>
                 <td>Mot De Passe</td>
+                <td>Niveau</td>
                 <td></td>
             </tr>
         </thead>
@@ -30,6 +31,17 @@
                 <td><?=$contact['fname']?></td>
                 <td><?=$contact['grp']?></td>
                 <td><?=$contact['password']?></td>
+                <td><?php
+                    $stmt2 = $pdo->prepare('SELECT * FROM student.level WHERE id = '.$contact['id_lev']);
+                    $stmt2->execute();
+                    $lev = $stmt2->fetchAll();
+                    $levels = $pdo->query('SELECT COUNT(*) FROM student.level') ->fetchColumn();
+                    foreach ($lev as $level):
+                    ?>
+                    
+                    <?=$level['name']?>
+                    <?php endforeach;?>
+                </td>
                 <td class="actions">
                     <a href="update.php?id=<?=$contact['id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
                     <a href="delete.php?id=<?=$contact['id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>

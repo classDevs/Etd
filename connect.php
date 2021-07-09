@@ -1,6 +1,6 @@
 <?php
     $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'srms';
+    $databaseName = 'student';
     $databaseUsername = 'root';
     $databasePassword = '';
     

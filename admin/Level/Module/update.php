@@ -8,11 +8,13 @@ if (isset($_GET['id'])) {
         $name = isset($_POST['name']) ? $_POST['name'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $title = isset($_POST['adr']) ? $_POST['adr'] : '';
-        $stmt = $pdo->prepare('UPDATE srms.module SET id = ?, titre = ?, coeficient = ?, unit = ? WHERE id = ?');
-        $stmt->execute([$id, $name, $email,$title, $_GET['id']]);
+        $level = isset($_POST['lev']) ? $_POST['lev'] : 0;
+        $sem = isset($_POST['sem']) ? $_POST['sem'] : 0;
+        $stmt = $pdo->prepare('UPDATE student.module SET id = ?, titre = ?, coeficient = ?, unit = ?,credit = ?, id_lev = ?, semseter = ?  WHERE id = ?');
+        $stmt->execute([$id, $name, $email,$title, $level, $sem, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM srms.module WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM student.module WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
@@ -30,15 +32,37 @@ if (isset($_GET['id'])) {
         <label for="id">ID</label>
         <label for="name">Libelle</label>
         <input type="text" name="id" value="<?=$contact['id']?>" id="id">
-        <input type="text" name="name" value="<?=$contact['titre']?>" id="name">
-        <label for="email">Coefecient</label>
-        <input type="number" name="email" value="<?=$contact['coeficient']?>" id="email" min = "1">
-        <label for="adr">Semestre</label>
+        <input type="text" name="name" id="name" value ="<?=$contact['titre']?>">
+        <label for="email">Coeficient</label>
+        <label for="crd">Crédit:</label>
+        <input type="number" name="email" id="email" min="1" value="<?=$contact['coeficient']?>">
+        <input type="number" name="crd" id="crd" step="1" value="<?=$contact['credit']?>">
+        <label for="lev">Niveau :</label>
+        <select name="lev" id="lev"><?php
+                $connection = connect();
+                $req = "SELECT id,name FROM level";
+                $res = $connection-> query($req);
+                while($row = $res -> fetch_assoc()){
+                    if($row['id'] === $contact['id_lev']){
+                        echo "<option selected = 'selected' value = ".$row['id'].">".$row['name']."</option>";    
+                    }else{
+                        echo "<option value = ".$row['id'].">".$row['name']."</option>";
+                    }
+                }
+            ?>
+        </select>
+        <label for="adr">Unite :</label>
         <select name="adr" id="adr">
             <option value="fondamentale">Fondamentale</option>
             <option value="methodologie ">Méthodologie </option>
             <option value="transversale ">Transversale </option>
         </select>
+        <label for="sem">Semestre :</label>
+        <select name="adr" id="adr">
+            <option value="1">Semestre 1</option>
+            <option value="2 ">Semestre 2</option>
+        </select>
+        
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>

@@ -3,7 +3,7 @@ include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg = '';
 if (isset($_GET['id'])) {
-    $stmt = $pdo->prepare('SELECT * FROM srms.level WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM student.level WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
     }
     if (isset($_GET['confirm'])) {
         if ($_GET['confirm'] == 'yes') {
-            $stmt = $pdo->prepare('DELETE FROM srms.level WHERE id = ?');
+            $stmt = $pdo->prepare('DELETE FROM student.level WHERE id = ?');
             $stmt->execute([$_GET['id']]);
             $msg = 'You have deleted the contact!';
             header('refresh:2;url=index.php');

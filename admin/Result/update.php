@@ -9,11 +9,11 @@ if (isset($_GET['id'])) {
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $title = isset($_POST['adr']) ? $_POST['adr'] : '';
         $moy = (($id+$name+$email)/3)*0.4 + $title*0.6;
-        $stmt = $pdo->prepare('UPDATE srms.results SET tp = ?, td = ?, cc = ?,exam = ?,result = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE student.results SET tp = ?, td = ?, cc = ?,exam = ?,result = ? WHERE id = ?');
         $stmt->execute([$id, $name, $email,$title,$moy, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM srms.results WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM student.results WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {

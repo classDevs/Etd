@@ -1,19 +1,4 @@
 <?php
-function connect()
-{
-    $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'srms';
-    $databaseUsername = 'root';
-    $databasePassword = '';
-    
-    if($connection = new mysqli($databaseHost, $databaseUsername, $databasePassword, $databaseName)){
-        return $connection;
-    }else{
-        echo "La Connexion au base de donnes est impossible";
-    }   
-}
-?>
-<?php
 include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg ='';
@@ -26,7 +11,7 @@ if(!empty($_POST)){
     $title = isset($_POST['adr']) ? $_POST['adr'] : '';
     $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
 
-    $stmt = $pdo->prepare('INSERT INTO srms.student (id,lname,fname,grp,adress,password,id_lev) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO student.student (id,lname,fname,grp,adress,password,id_lev) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$id, $name, $email, $phone,$title,$pwd,$lev]);
 
     $msg ='Created Successfully!!!';

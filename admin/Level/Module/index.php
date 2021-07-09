@@ -2,10 +2,10 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM srms.module ORDER BY id');
+    $stmt = $pdo->prepare('SELECT * FROM student.module ORDER BY id');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.module') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.module') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">
@@ -19,6 +19,7 @@
                 <td>Libelle</td>
                 <td>Crédit</td>
                 <td>Coefecient</td>
+                <td>Semestre</td>
                 <td>Niveau</td>
                 <td></td>
             </tr>
@@ -27,15 +28,22 @@
             <?php foreach ($contacts as $contact): ?>
             <tr>
                 <td><?=$contact['id']?></td>
-                <td><?=$contact['unit']?></td>
+                <td><?=$contact['Unit']?></td>
                 <td><?=$contact['titre']?></td>
                 <td><?=$contact['credit']?></td>
                 <td><?=$contact['coeficient']?></td>
+                <td><?=$contact['semseter']?></td>
                 <td><?php
-                    $stmt2 = $pdo->prepare('SELECT * FROM srms.level WHERE id = '.$contact['id_lev']);
+                    $stmt2 = $pdo->prepare('SELECT * FROM student.level WHERE id = '.$contact['id_lev']);
                     $stmt2->execute();
-                    $lev = $stmt2->fetchAll();?>
-                    <?=$lev?></td>
+                    $lev = $stmt2->fetchAll();
+                    $levels = $pdo->query('SELECT COUNT(*) FROM student.level') ->fetchColumn();
+                    foreach ($lev as $level):
+                    ?>
+                    
+                    <?=$level['name']?>
+                    <?php endforeach;?>
+                </td>
                 <td class="actions">
                     <a href="update.php?id=<?=$contact['id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
                     <a href="delete.php?id=<?=$contact['id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>
