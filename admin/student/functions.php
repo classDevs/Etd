@@ -2,7 +2,7 @@
 function connect()
 {
     $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'student';
+    $databaseName = 'srms';
     $databaseUsername = 'root';
     $databasePassword = '';
     
@@ -18,7 +18,7 @@ function connect()
         $DATABASE_HOST = 'localhost';
         $DATABASE_USER = 'root';
         $DATABASE_PASS = '';
-        $DATABASE_NAME = 'student';
+        $DATABASE_NAME = 'srms';
         
         try{
             return new PDO('mysql:host='. $DATABASE_HOST .';dbname ='. $DATABASE_NAME .'; charset=utf8',$DATABASE_USER,$DATABASE_PASS);

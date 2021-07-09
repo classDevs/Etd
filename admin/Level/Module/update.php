@@ -10,11 +10,11 @@ if (isset($_GET['id'])) {
         $title = isset($_POST['adr']) ? $_POST['adr'] : '';
         $level = isset($_POST['lev']) ? $_POST['lev'] : 0;
         $sem = isset($_POST['sem']) ? $_POST['sem'] : 0;
-        $stmt = $pdo->prepare('UPDATE student.module SET id = ?, titre = ?, coeficient = ?, unit = ?,credit = ?, id_lev = ?, semseter = ?  WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE srms.module SET id = ?, titre = ?, coeficient = ?, unit = ?,credit = ?, id_lev = ?, semseter = ?  WHERE id = ?');
         $stmt->execute([$id, $name, $email,$title, $level, $sem, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
-    $stmt = $pdo->prepare('SELECT * FROM student.module WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM srms.module WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {

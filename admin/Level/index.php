@@ -2,10 +2,10 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM student.level');
+    $stmt = $pdo->prepare('SELECT * FROM srms.level');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.results') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.results') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">

@@ -2,10 +2,10 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM student.module ORDER BY id');
+    $stmt = $pdo->prepare('SELECT * FROM srms.module ORDER BY id');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.module') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.module') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">
@@ -34,10 +34,10 @@
                 <td><?=$contact['coeficient']?></td>
                 <td><?=$contact['semseter']?></td>
                 <td><?php
-                    $stmt2 = $pdo->prepare('SELECT * FROM student.level WHERE id = '.$contact['id_lev']);
+                    $stmt2 = $pdo->prepare('SELECT * FROM srms.level WHERE id = '.$contact['id_lev']);
                     $stmt2->execute();
                     $lev = $stmt2->fetchAll();
-                    $levels = $pdo->query('SELECT COUNT(*) FROM student.level') ->fetchColumn();
+                    $levels = $pdo->query('SELECT COUNT(*) FROM srms.level') ->fetchColumn();
                     foreach ($lev as $level):
                     ?>
                     

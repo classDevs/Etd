@@ -2,10 +2,10 @@
     include 'functions.php';
     $pdo = pdo_connect_mysql();
 
-    $stmt = $pdo->prepare('SELECT * FROM student.student ORDER BY id');
+    $stmt = $pdo->prepare('SELECT * FROM srms.student ORDER BY id');
     $stmt->execute();
     $contacts = $stmt->fetchAll();
-    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM student.student') ->fetchColumn();
+    $nums_contacts = $pdo->query('SELECT COUNT(*) FROM srms.student') ->fetchColumn();
 ?>
 <?=template_header('Etudiant')?>
 <div class="content read">
@@ -32,10 +32,10 @@
                 <td><?=$contact['grp']?></td>
                 <td><?=$contact['password']?></td>
                 <td><?php
-                    $stmt2 = $pdo->prepare('SELECT * FROM student.level WHERE id = '.$contact['id_lev']);
+                    $stmt2 = $pdo->prepare('SELECT * FROM srms.level WHERE id = '.$contact['id_lev']);
                     $stmt2->execute();
                     $lev = $stmt2->fetchAll();
-                    $levels = $pdo->query('SELECT COUNT(*) FROM student.level') ->fetchColumn();
+                    $levels = $pdo->query('SELECT COUNT(*) FROM srms.level') ->fetchColumn();
                     foreach ($lev as $level):
                     ?>
                     

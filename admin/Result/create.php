@@ -1,19 +1,4 @@
 <?php
-function connect()
-{
-    $databaseHost = '127.0.0.1';//or localhost
-    $databaseName = 'student';
-    $databaseUsername = 'root';
-    $databasePassword = '';
-    
-    if($connection = new mysqli($databaseHost, $databaseUsername, $databasePassword, $databaseName)){
-        return $connection;
-    }else{
-        echo "La Connexion au base de donnes est impossible";
-    }   
-}
-?>
-<?php
 include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg ='';
@@ -25,7 +10,7 @@ if(!empty($_POST)){
     $email = isset($_POST['email']) ? $_POST['email'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : 0;
     $moy = (($id+$name+$email)/3)*0.4 + $title*0.6;
-    $stmt = $pdo->prepare('INSERT INTO student.results (id_std,id_mod,tp,td,cc,exam,result) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO srms.results (id_std,id_mod,tp,td,cc,exam,result) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$std,$mod,$id, $name, $email,$title,$moy]);
 
     $msg ='Created Successfully!!!';
@@ -50,7 +35,7 @@ if(!empty($_POST)){
         
         <label for="mod">Module</label>
         <select name="mod"><?php 
-                $req = "SELECT id,titre,semseter FROM module ORDER BY id";
+                $req = "SELECT id,titre,semseter FROM module  ORDER BY id";
                 $res = $connection-> query($req);
                 
                 while($row = $res -> fetch_assoc()){

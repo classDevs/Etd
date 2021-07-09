@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2021 at 08:16 PM
+-- Generation Time: Jul 09, 2021 at 08:00 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -77,7 +77,8 @@ CREATE TABLE `module` (
   `coeficient` int(50) NOT NULL,
   `credit` int(50) NOT NULL DEFAULT 0,
   `semseter` varchar(255) NOT NULL,
-  `Unit` varchar(255) NOT NULL
+  `Unit` varchar(255) NOT NULL,
+  `id_lev` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -139,7 +140,8 @@ ALTER TABLE `level`
 -- Indexes for table `module`
 --
 ALTER TABLE `module`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_lev` (`id_lev`);
 
 --
 -- Indexes for table `results`
@@ -199,6 +201,12 @@ ALTER TABLE `student`
 --
 ALTER TABLE `average`
   ADD CONSTRAINT `std` FOREIGN KEY (`id_std`) REFERENCES `student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `module`
+--
+ALTER TABLE `module`
+  ADD CONSTRAINT `module_ibfk_1` FOREIGN KEY (`id_lev`) REFERENCES `level` (`id`);
 
 --
 -- Constraints for table `results`
