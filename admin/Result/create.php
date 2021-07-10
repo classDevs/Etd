@@ -3,17 +3,51 @@ include 'functions.php';
 $pdo = pdo_connect_mysql();
 $msg ='';
 if(!empty($_POST)){
-    $id = isset($_POST['id']) ? $_POST['id'] : 0;
     $std = isset($_POST['std']) ? $_POST['std'] : 0;
     $mod = isset($_POST['mod']) ? $_POST['mod'] : 0;
-    $name = isset($_POST['name']) ? $_POST['name'] : 0;
     $email = isset($_POST['email']) ? $_POST['email'] : 0;
     $title = isset($_POST['adr']) ? $_POST['adr'] : 0;
-    $moy = (($id+$name+$email)/3)*0.4 + $title*0.6;
-    $stmt = $pdo->prepare('INSERT INTO srms.results (id_std,id_mod,tp,td,cc,exam,result) VALUES (?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$std,$mod,$id, $name, $email,$title,$moy]);
+    $moy = $email*0.4 + $title*0.6;
+    $stmt = $pdo->prepare('INSERT INTO srms.results (id_std,id_mod,cc,exam,result) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$std,$mod, $email,$title,$moy]);
 
-    $msg ='Created Successfully!!!';
+    $msg ='Ajout avec Succes !!!';
+    addRes($std);
+}
+function addRes($std){
+    $req = "SELECT m.titre as module,m.coeficient as coef,r.result as res
+    FROM module m, results r WHERE r.id_std = '".$std."' and m.id = r.id_mod";
+
+    $connection = connect();
+    $res = $connection -> query($req);
+    $total = 0;
+    $scoef = 0;
+    while($row=$res-> fetch_assoc()){
+        $tot = $row['coef']*$row['res'];
+        $total+=$tot;
+        $scoef+=$row['coef'];
+    }
+    avg($total,$scoef,$std,$connection);
+}
+function avg($total,$scoef,$std,$connection){
+    $fres = $total/$scoef;
+    $sql = "SELECT id_std FROM average WHERE id_std =".$std;
+    $test= mysqli_query($connection,$sql);
+    if (mysqli_num_rows($test)>0){
+        $req = "UPDATE average SET sum = $total,sumc = $scoef,fres = $fres
+        WHERE id_std=$std";
+            if($res = $connection->query($req)){
+        }else{
+            echo "Erreur 1";
+        }
+    }
+    else{
+        $req = "INSERT INTO average (id_std,sum,sumc,fres) VALUES ($std,$total,$scoef,$fres)";
+            if($res = $connection->query($req)){
+        }else{
+            echo "Erreur 2";
+        }
+    }
 }
 ?>
 <?=template_header('Create')?>
@@ -35,17 +69,13 @@ if(!empty($_POST)){
         
         <label for="mod">Module</label>
         <select name="mod"><?php 
-                $req = "SELECT id,titre,semseter FROM module  ORDER BY id";
+                $req = "SELECT id,titre,semseter FROM module ORDER BY id";
                 $res = $connection-> query($req);
                 
                 while($row = $res -> fetch_assoc()){
                     echo "<option value = ".$row['id']."> ".$row['id']." :Module ".$row['titre'] ."</option>";
                 }
         ?></select>
-        <label for="id">Note TP</label>
-        <label for="name">Note TD</label>
-        <input type="number" name="id" min="0" max="20" step="0.05" id="id">
-        <input type="number" name="name" id="name" min="0" max="20" step="0.05">
         <label for="email">Note CC</label>
         <label for="adr">Note Exam</label>
         <input type="number" name="email" id="email" min="0" max="20" step="0.25">

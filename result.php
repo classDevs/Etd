@@ -220,8 +220,8 @@
             </tr>
             <?php
                  include('connect.php');
-                 $req = "SELECT m.unit as unit m.titre as module,m.coeficient as coef,r.result as res m.credit as credit
-                 FROM module m, results r WHERE r.id_std = '".$id."' and m.id = r.id_mod ORDER BY semsetre";
+                 $req = "SELECT m.unit as unit, m.titre as module,m.coeficient as coef,r.result as res, m.credit as credit
+                 FROM module m, results r WHERE r.id_std = '".$id."' and m.id = r.id_mod";
      
                  $res = $connection -> query($req);
                  $total = 0;
@@ -249,7 +249,7 @@
                  }
                  $fres = $total/$scoef;
                  echo"<tr>
-                 <td>Totale et Moyenne</td>
+                 <td>Totale et Moyenne</td><td></td>
                  <td>".$scoef."</td>
                  <td>".$total."</td>
                  <td>".$credit."</td>

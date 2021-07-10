@@ -10,18 +10,19 @@ if (isset($_GET['id'])) {
         $email = isset($_POST['email']) ? $_POST['email'] : '';
         $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
         $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
-        $stmt = $pdo->prepare('UPDATE srms.student SET id = ?, lname = ?, fname = ?, grp = ? , password = ?, id_lev = ? WHERE id = ?');
-        $stmt->execute([$id, $name, $email, $phone,$pwd,$lev, $_GET['id']]);
+        $date = isset($_POST['date']) ? $_POST['date'] : '';
+        $stmt = $pdo->prepare('UPDATE srms.student SET id = ?, lname = ?, fname = ?, grp = ? , password = ?, id_lev = ?, sy = ? WHERE id = ?');
+        $stmt->execute([$id, $name, $email, $phone,$pwd,$lev,$date, $_GET['id']]);
         $msg = 'Updated Successfully!';
     }
     $stmt = $pdo->prepare('SELECT * FROM srms.student WHERE id = ?');
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
-        exit('Contact doesn\'t exist with that ID!');
+        exit("Il n'existe pas Un Etudiant avec cet identifiant !");
     }
 } else {
-    exit('No ID specified!');
+    exit('Aucun identifiant spécifié !');
 }
 ?>
 <?=template_header('Etudiant')?>
@@ -55,6 +56,8 @@ if (isset($_GET['id'])) {
         <label for="phone">Group</label>
         <input type="password" name="pwd" id="title" value="<?=$contact['password']?>">
         <input type="text" name="phone" id="phone" value="<?=$contact['grp']?>">
+        <label for="date">Promotion</label>
+        <input type="number" name="date" id="date" min="1900" max="2099" step="1" value="<?=$contact['sy']?>">
         <input type="submit" value="Update">
     </form>
     <?php if ($msg): ?>

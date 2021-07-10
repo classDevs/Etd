@@ -20,6 +20,7 @@
                 <td>Groupe</td>
                 <td>Mot De Passe</td>
                 <td>Niveau</td>
+                <td>Promotion</td>
                 <td></td>
             </tr>
         </thead>
@@ -42,6 +43,7 @@
                     <?=$level['name']?>
                     <?php endforeach;?>
                 </td>
+                <td><?=$contact['sy']?></td>
                 <td class="actions">
                     <a href="update.php?id=<?=$contact['id']?>" class="edit"><i class="fas fa-pen fa-xs"></i></a>
                     <a href="delete.php?id=<?=$contact['id']?>" class="trash"><i class="fas fa-trash fa-xs"></i></a>

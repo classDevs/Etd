@@ -13,10 +13,10 @@ if (isset($_GET['id'])) {
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
-        exit('Contact doesn\'t exist with that ID!');
+        exit("La resultat n'existe pas avec cet identifiant !");
     }
 } else {
-    exit('No ID specified!');
+    exit('Aucun identifiant spécifié !');
 }
 ?>
 <?=template_header('Etudiant')?>

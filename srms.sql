@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2021 at 08:00 PM
+-- Generation Time: Jul 10, 2021 at 09:55 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -54,6 +54,7 @@ CREATE TABLE `average` (
   `credit` int(50) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +65,10 @@ CREATE TABLE `level` (
   `id` int(50) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `level`
+--
 
 -- --------------------------------------------------------
 
@@ -91,12 +96,11 @@ CREATE TABLE `results` (
   `id` int(50) NOT NULL,
   `id_std` int(50) NOT NULL,
   `id_mod` int(50) NOT NULL,
-  `tp` decimal(20,2) NOT NULL,
-  `td` decimal(20,2) NOT NULL,
   `cc` decimal(20,2) NOT NULL,
   `exam` decimal(20,2) NOT NULL,
   `result` decimal(20,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 
@@ -110,6 +114,7 @@ CREATE TABLE `student` (
   `lname` varchar(255) NOT NULL,
   `adress` varchar(255) NOT NULL,
   `grp` varchar(255) NOT NULL,
+  `sy` int(4) NOT NULL,
   `password` varchar(255) NOT NULL,
   `id_lev` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

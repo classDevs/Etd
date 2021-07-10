@@ -14,7 +14,7 @@ if(!empty($_POST)){
     $stmt = $pdo->prepare('INSERT INTO srms.module (id,titre,coeficient,credit,unit,id_lev,semseter) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([$id, $name, $email,$phone,$title,$level,$sem]);
 
-    $msg ='Created Successfully!!!';
+    $msg ='Ajout avec Succes!!!';
 }
 ?>
 <?=template_header('Create')?>

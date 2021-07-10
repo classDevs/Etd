@@ -10,11 +10,11 @@ if(!empty($_POST)){
     $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
     $title = isset($_POST['adr']) ? $_POST['adr'] : '';
     $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
+    $date = isset($_POST['date']) ? $_POST['date'] : 0;
+    $stmt = $pdo->prepare('INSERT INTO srms.student (id,lname,fname,grp,adress,password,id_lev,sy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([$id, $name, $email, $phone,$title,$pwd,$lev,$date]);
 
-    $stmt = $pdo->prepare('INSERT INTO srms.student (id,lname,fname,grp,adress,password,id_lev) VALUES (?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute([$id, $name, $email, $phone,$title,$pwd,$lev]);
-
-    $msg ='Created Successfully!!!';
+    $msg ='Ajout avec Succes!!!';
 }
 ?>
 <?=template_header('Create')?>
@@ -32,6 +32,8 @@ if(!empty($_POST)){
                 }
             ?>
         </select>
+        <label for="date">Anne Universetaire :</label>
+        <input type="number" name="date" min="1900" max="2099" step="1" value="2021">
         <label for="id">ID</label>
         <label for="name">Nom</label>
         <input type="text" name="id" value="auto" id="id">

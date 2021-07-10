@@ -8,7 +8,7 @@ if(!empty($_POST)){
     $stmt = $pdo->prepare('INSERT INTO srms.level (id,name) VALUES (?, ?)');
     $stmt->execute([$id,$name]);
 
-    $msg ='Created Successfully!!!';
+    $msg ='Ajout avec Succes!!!';
 }
 ?>
 <?=template_header('Create')?>

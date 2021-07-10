@@ -7,20 +7,20 @@ if (isset($_GET['id'])) {
     $stmt->execute([$_GET['id']]);
     $contact = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$contact) {
-        exit('Contact doesn\'t exist with that ID!');
+        exit("Il n'existe pas un module avec cet identifiant !");
     }
     if (isset($_GET['confirm'])) {
         if ($_GET['confirm'] == 'yes') {
             $stmt = $pdo->prepare('DELETE FROM srms.module WHERE id = ?');
             $stmt->execute([$_GET['id']]);
-            $msg = 'You have deleted the contact!';
+            $msg = "Vous avez supprimé l'enregistrement !";
         } else {
             header('Location: index.php');
             exit;
         }
     }
 } else {
-    exit('No ID specified!');
+    exit('Aucun identifiant spécifié !');
 }
 ?>
 <?=template_header('Delete')?>
