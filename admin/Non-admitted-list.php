@@ -165,9 +165,7 @@ session_start();
         <tr>
             <th>ID</th>
             <th>Nom</th>
-            <th>Notes TD</th>
             <th>Notes CC</th>
-            <th>Notes TP</th>
             <th>Notes Examen</th>
             <th>Moyens</th>
         </tr>
