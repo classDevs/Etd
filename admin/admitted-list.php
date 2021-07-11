@@ -165,9 +165,7 @@ session_start();
         <tr>
             <th>ID</th>
             <th>Nom</th>
-            <th>Notes TD</th>
             <th>Notes CC</th>
-            <th>Notes TP</th>
             <th>Notes Examen</th>
             <th>Moyens</th>
         </tr>
@@ -176,7 +174,7 @@ session_start();
                 include('../connect.php');
                 //$req = "SELECT id FROM module WHERE titre = ".$mod."";
                 $req = "SELECT s.id as id,s.fname as fname,s.lname as lname,r.result as res
-                ,r.td as td,r.tp as tp,r.cc as cc,r.exam as exam
+                ,r.cc as cc,r.exam as exam
                  FROM student s, results r WHERE id_mod = ".$_SESSION['mod']." 
                  and r.result >= 10 and s.id = r.id_std";
                 $res = $connection -> query($req);
@@ -185,9 +183,7 @@ session_start();
                     echo "<tr>
                     <td>".$row['id']."</td>
                     <td>".$row['lname']."   ".$row['fname']."</td>
-                    <td>".$row['td']."</td>
                     <td>".$row['cc']."</td>
-                    <td>".$row['tp']."</td>
                     <td>".$row['exam']."</td>
                     <td>".$row['res']."</td>
                     </tr>";
